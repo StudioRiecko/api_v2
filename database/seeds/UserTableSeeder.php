@@ -13,14 +13,8 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        $factory->define(User::class, function (Faker\Generator $faker) {
-            return [
-                'name' => $faker->name,
-                'email' => $faker->email,
-                'password' => bcrypt(str_random(10)),
-                'remember_token' => str_random(10),
-            ];
-        });
+        $user = factory(\App\Modules\User\Models\User::class)->create(['email' => 'gebruiker@studioriecko.nl']);
+        //factory(\App\Modules\User\Models\UserProfile::class)->create(['user_id' => $user->id]);
     }
     
     
