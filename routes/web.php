@@ -10,6 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+use Illuminate\Routing\RouteGroup;
+
+//RouteGroup::get('/{any}', 'SinglePageController@index')->where('any', '.*');
 
 Route::get('/', function () {
     return view('welcome');

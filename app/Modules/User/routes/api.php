@@ -1,7 +1,13 @@
-<?php
+<?php 
 
-Route::group(['module' => 'User', 'middleware' => ['api'], 'namespace' => 'App\Modules\User\Controllers'], function() {
+$route_data = [
+    'module' => 'User',
+    'prefix' => 'api/v1/users',
+    'middleware' => ['api', 'auth:api'],
+    'namespace' => 'App\Modules\User\Controllers',
+];
 
-    Route::resource('User', 'UserController');
-
+Route::group($route_data, function () {
+    Route::get('/me', 'UserMeController@show')->name('users.me');
+  
 });
