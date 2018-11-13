@@ -2,7 +2,7 @@
 
 $route_data = [
     'module' => 'User',
-    'prefix' => 'api/v1/users',
+    'prefix' => 'users',
     'middleware' => ['api', 'auth:api'],
     'namespace' => 'App\Modules\User\Controllers',
 ];
