@@ -51,7 +51,6 @@ class AuthController extends Controller
         ];
         
         $user = $this->user_repository->storeRequest($data);
-        dd($user);
         
         $responseData = array();
         $responseData['error'] = false;
