@@ -14,7 +14,7 @@ class AddGenderToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function($table) {
-            $table->integer('gender')->after('name');
+            $table->integer('gender')->after('name')->nullable();
         });
     }
 
