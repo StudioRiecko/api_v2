@@ -41,18 +41,18 @@ class AuthController extends Controller
      */
     public function store (StoreEmailRequest $request) : JsonResponse
     {
-        $responseData = array();
-        $responseData['error'] = true;
-        $responseData['message'] = 'This email already exist, please login';
+        $user = $this->user_repository->storeRequest($request);
         
+        $responseData = array();
+        $responseData['error'] = false;
+        $responseData['message'] = 'Registered successfully';
+        $responseData['user'] = $user; 
         return response()->json($responseData);
         
-        dd($request->get('email'));
-        $user = $this->user_repository->storeEmailAndMakeActivationToken($request);
         //$user->callback_url = $request->get('callback_url');
         //$user->notify(new SendActivation($user));
 
-        return responder()->success($user)->respond();
+        //return responder()->success($user)->respond();
     }
 
     /**

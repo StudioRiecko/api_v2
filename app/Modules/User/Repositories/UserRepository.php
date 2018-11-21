@@ -24,6 +24,16 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
      *
      * @return User
      */
+    public function storeRequest($user): User
+    {
+        return $this->model()->create($user);
+    }
+
+    /**
+     * @param $user
+     *
+     * @return User
+     */
     public function storeEmailAndMakeActivationToken($user): User
     {
        return $this->model()->create($user);

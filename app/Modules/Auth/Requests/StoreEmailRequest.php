@@ -16,7 +16,7 @@ class StoreEmailRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize(): bool
+    public function authorize (): bool
     {
         return true;
     }
@@ -26,10 +26,13 @@ class StoreEmailRequest extends FormRequest
      *
      * @return array
      */
-    public function rules(): array
+    public function rules (): array
     {
         return [
-            'email' => 'required|unique:users|email',
+            'name'     => 'required|min:4',
+            'email'    => 'required|unique:users|email',
+            'password' => 'required',
+            'gender'   => 'required',
         ];
     }
 }
