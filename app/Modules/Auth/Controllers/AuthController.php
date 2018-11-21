@@ -41,7 +41,17 @@ class AuthController extends Controller
      */
     public function store (StoreEmailRequest $request) : JsonResponse
     {
-        $user = $this->user_repository->storeRequest($request);
+        $data = [
+            'name'     => $request->get('name'),
+            'email'    => $request->get('email'),
+            'password' => bcrypt(
+                $request->get('password')
+                ),
+            'gender'   => $request->get('gender'),
+        ];
+        
+        $user = $this->user_repository->storeRequest($data);
+        dd($user);
         
         $responseData = array();
         $responseData['error'] = false;
