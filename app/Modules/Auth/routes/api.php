@@ -8,6 +8,6 @@ $route_data = [
 ];
 
 Route::group($route_data, function () {
+    Route::get('/users', 'AuthController@index')->name('index.user');
     Route::post('/register', 'AuthController@store')->name('store.user');
-    
 });

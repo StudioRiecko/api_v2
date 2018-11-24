@@ -27,11 +27,23 @@ class AuthController extends Controller
      * @param UserRepositoryInterface           $user_repository
      */
     public function __construct (
-        UserRepositoryInterface $user_repository
-        ) {
+        UserRepositoryInterface $user_repository) {
             $this->user_repository = $user_repository;
     }
 
+    /**
+     * View all users.
+     *
+     * @return JsonResponse
+     */
+    public function index () : JsonResponse 
+    {
+        $users = $this->user_repository->all();
+        //dd($users);
+        
+        return response()->json(['users' => $users]);
+    }
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -41,16 +53,7 @@ class AuthController extends Controller
      */
     public function store (StoreEmailRequest $request) : JsonResponse
     {
-        $data = [
-            'name'     => $request->get('name'),
-            'email'    => $request->get('email'),
-            'password' => bcrypt(
-                $request->get('password')
-                ),
-            'gender'   => $request->get('gender'),
-        ];
-        
-        $user = $this->user_repository->storeRequest($data);
+        $user = $this->user_repository->storeRequest($request);
         
         $responseData = array();
         $responseData['error'] = false;
