@@ -55,7 +55,7 @@ class AuthController extends Controller
      */
     public function login (Request $request) : JsonResponse
     {
-        if(Auth::attempt(['email' => request('username'), 'password' => request('password')])){
+        if(Auth::attempt(['email' => request('email'), 'password' => request('password')])){
             $user = Auth::user();
             $success =  array();
             $success['error'] = false;
