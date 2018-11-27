@@ -5,6 +5,7 @@ namespace App\Modules\Auth\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth; 
 use App\Modules\User\Interfaces\UserRepositoryInterface;
 use App\Modules\Auth\Requests\StoreEmailRequest;
 
@@ -20,6 +21,8 @@ class AuthController extends Controller
      * @var UserRepositoryInterface
      */
     private $user_repository;
+    
+    public $successStatus = 200;
     
     /**
      * AuthController constructor.
@@ -39,9 +42,32 @@ class AuthController extends Controller
     public function index () : JsonResponse 
     {
         $users = $this->user_repository->all();
-        //dd($users);
         
         return response()->json(['users' => $users]);
+    }
+    
+    /**
+     * login a user.
+     *
+     * @param  Request $request
+     *
+     * @return JsonResponse
+     */
+    public function login (Request $request) : JsonResponse
+    {
+        if(Auth::attempt(['email' => request('username'), 'password' => request('password')])){
+            $user = Auth::user();
+            $success =  array();
+            $success['error'] = false;
+            $success['user'] = $user;
+            $success['token'] =  $user->createToken('StudioRiecko')-> accessToken;
+            return response()->json($success, $this-> successStatus); 
+        } else {
+            $responseData = array();
+            $responseData['error'] = true;
+            $responseData['message'] = 'Invalid email or password';
+            return response()->json($responseData);
+        }
     }
     
     /**

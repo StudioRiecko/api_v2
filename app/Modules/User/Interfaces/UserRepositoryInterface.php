@@ -5,6 +5,7 @@ namespace App\Modules\User\Interfaces;
 use App\Modules\User\Models\User;
 use App\Modules\User\Models\UserProfile;
 use App\Modules\Base\Interfaces\BaseRepositoryInterface;
+use Illuminate\Database\Eloquent\Collection;
 
 /**
  * Interface UserRepositoryInterface
@@ -19,12 +20,5 @@ interface UserRepositoryInterface extends BaseRepositoryInterface
      * @return User
      */
     public function StoreEmailAndMakeActivationToken($user): User;
-
-    /**
-     * @param $user
-     *
-     * @return User
-     */
-    public function findUserByToken($activation_token): User;
 
 }
