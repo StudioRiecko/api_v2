@@ -16,8 +16,4 @@ class UserTableSeeder extends Seeder
         $user = factory(\App\Modules\User\Models\User::class)->create(['email' => 'gebruiker@studioriecko.nl']);
         factory(\App\Modules\User\Models\UserProfile::class)->create(['user_id' => $user->id]);
     }
-    
-    
-    
-    
 }

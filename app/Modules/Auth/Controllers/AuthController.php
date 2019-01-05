@@ -60,13 +60,15 @@ class AuthController extends Controller
             $success =  array();
             $success['error'] = false;
             $success['user'] = $user;
-            $success['token'] =  $user->createToken('StudioRiecko')-> accessToken;
-            return response()->json($success, $this-> successStatus); 
+            $success['token'] =  $user->createToken('StudioRiecko')->accessToken;
+            
+            return response()->json($success, $this->successStatus); 
         } else {
-            $responseData = array();
-            $responseData['error'] = true;
-            $responseData['message'] = 'Invalid email or password';
-            return response()->json($responseData);
+            $error = array();
+            $error['error'] = true;
+            $error['message'] = 'Invalid email or password';
+            
+            return response()->json($error);
         }
     }
     
@@ -85,13 +87,9 @@ class AuthController extends Controller
         $responseData['error'] = false;
         $responseData['message'] = 'Registered successfully';
         $responseData['user'] = $user; 
-        return response()->json($responseData);
         
-        //$user->callback_url = $request->get('callback_url');
-        //$user->notify(new SendActivation($user));
-
-        //return responder()->success($user)->respond();
-    }
+        return response()->json($responseData);
+     }
 
     /**
      * Update the specified resource in storage.
@@ -100,7 +98,7 @@ class AuthController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update (Request $request, $id)
     {
         //
     }
